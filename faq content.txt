@@ -1,0 +1,122 @@
+IRN WEBSITE FAQ
+
+whyregister.html - What is registration and why should I register?
+
+hardware.html - What hardware is needed to access the network?
+
+software.html - what software is needed? 
+To start, we recommend:
+Zello is a great walkie talkie app that works well on most platforms, and is free for personal use. It is available for the desktop, for Android devices, and for iOS.
+Teamspeak 3 is another great app that runs on most platforms, is easy to set up, and provides excellent audio quality.
+Channels are crosslinked between Zello and Teamspeak, so there is no need to have both applications, but many members choose to do so.
+
+setupzello.html - How do I set up Zello? 
+Use Ray's video as a guide. 
+
+setupteamspeak.html - How do I set up Teamspeak?  
+TeamSpeak 3 setup – iPhone (Android is similar)​
+1: Download TeamSpeak 3 – Visit the app store for this app 
+2: Once downloaded, Click TeamSpeak icon so the application opens up.
+3: Click on Continue and the “Create New Account”.
+This is allowing you to register with the TS3 Application. This part of the process is not Part of the IRN setup, but it will mean that Once the server details are saved, you can Sign in on any device and use the Application.
+Once you have set up and verified your email address with the TS3 application, you will return to the “Bookmark” page.
+4: Click on bookmarks (and ‘done’ if it shows).
+(On first use, it will show a public TS server. This server is a
+Free one and used by many individuals. Whilst you are
+Welcome to use it, please be aware it does attract some
+Very “unique” individuals. This is why we have our own
+private server).
+5: Click on + in bottom left corner.
+6: Fill in the following details:
+Address: irn.radio  or  ts.irn.radio    (either will do the trick!)
+Label: IRN Server
+Your nickname should display your licensed call as follows:
+CALLSIGN NAME
+(e.g. AB1SPL – SAM) please put your Call Sign in CAPS 
+Password: leave blank
+Then go back to bookmarks (top left).
+You should now see “IRN Server” under the bookmarks header.
+7: Click on the IRN Server and it will open a window
+And it will say “connect to server”. Click “OK”.
+8: Once it connects, you will see the following screen.
+ This shows the “Talk Groups” that are in use on this server.
+As more talk groups are being added all the time, this list will change
+slightly.
+When you first enter the talk group, it will automatically
+ put you into “Welcome Channel”.
+The Welcome Channel is not linked to anything else and is only
+ hosted on the IRN Server on TeamSpeak 3.
+That’s it, you are connected!
+When you first join the server, you will only able to transmit in the Welcome Channel and Help Channel. Your user icon (on the right of your callsign and name) will show as a  symbol until you have been given ‘talk-rights’ by a Moderator or Administrator. Give a call on the welcome channel to let us know you are there, and someone will help you and give you talk rights, according to whether you are a licensed ham or non-ham. Only licensed hams have access to transmit on channels that are RF-linked, but non-hams can listen, and also have access to other channels.
+If you have any issues with this, please contact us by email irnhamradio@gmail.com and the Admin Team will be glad to help
+Sadly we have had some users try and create bogus callsigns and/or use someone else’s. With certain talkgroups being RF linked, it is important that we take reasonable steps to ensure that TX abilities are only given to licensed users. We hope you understand why this precaution is in place.
+If your icon has changed to a  or a  that means that you are now free to move around and TX and RX within the system.
+If your symbol changes to a , this means that we have an issue with your station and will need you to contact us directly by emailing irnhamradio@gmail.com
+PLEASE NOTE, THE ABILITY TO TRANSMIT AND MOVE AROUND THE SYSTEM IS RESTRICTED UNTIL YOU HAVE BEEN GIVEN TALK RIGHTS ON THE WELCOME CHANNEL.
+Standard radio etiquette and respect should be maintained in all talk groups at all times
+To move to another talk group, simply just tap the group you want to join (or ‘tap and hold’ with some). Then select “Join Channel”.​
+In order to transmit, just hold down the blue microphone button (PTT) on the bottom of the screen. If you are using a device with a PTT then you can go into settings (or Tools) and assign the PTT button.
+To enable your external speaker, make sure you check the box marked 'Hands Free' in settings.
+PLEASE ENSURE THAT YOU ARE NOT ON VOX MODE (Some devices default to this for some reason. You can change it to PTT mode in the settings). See below for details.
+Please feel free to drop us a line with any questions or queries you may have at any time.
+How to disable VOX.
+By default on some devices, the VOX (Voice Activated Transmit) is turned on. In order to use the IRN Server, you will need to disable this so you are not causing a feedback to other users.
+With the application open, select Menu.
+Then scroll down to the “settings” option.
+Then scroll down to “General” and
+select “Voice Mode”.
+Lastly, ensure that “Push-To-Talk” is enabled.
+You can then exit the menu settings.
+
+operators.html - Licensed and non-licensed operators - how does that work? 
+Both licensed and non-licensed operators are welcome to participate in the IRN. Please explain how that works.
+Some channels have no connection to RF. These channels are open to all licensed and non-licensed operators, are permanently crosslinked (connected together) and include the following:
+"International Radio Network Channel" on Zello;
+"IRN QSO and Nets Channel" on TeamSpeak 3.
+These channels are also crosslinked with "ZMR 851.065" on Zello.
+So whether you use Zello or Teamspeak, you can connect to the same place.
+The IRN does also have a standalone Zello channel, where you do not need trusted, but it is moderated. It is the Zello channel called ‘Ham Radio Hub’.
+
+Other channels have direct connections to RF through repeaters, gateways and nodes located around the world, and are therefore only available to licensed operators. They include the following:
+"KB1 MULTIMODE LINKS" on Teamspeak 3
+"KB1 Channel" and ‘ZMR 851.900’on Zello
+Allstar node 552360
+Echolink KC1MUV-L (primary) or M0JKT-L (secondary)
+DMR (TGIF or SystemX) - Talkgroup 31320
+Hamshack Hotline 94136
+
+trusted.html - Talk rights and trusted status - what do I need to do? 
+"Talk rights" and "trusted" status - what does it mean and how to I become "trusted"?
+When you first log in to the IRN on a Zello channel, only a moderator will be able to hear you. If you identify, and ask for help, the moderator will be able to check the member database and "trust" you into the channel so that everyone can hear you. You will need to do this for each Zello 
+channel you connect to.
+When you first log in using Teamspeak, you will enter the ‘Welcome Channel’, where an Admin or Moderator will allocate you with a level of ‘talk-rights’, depending on you licensed status. This means that you will have access to the appropriate channels, depending on whether or not you are licensed. Once granted, talk rights are permanent, but can be revoked in the case of inappropriate use of the system.
+Our moderators are all volunteers, and do not monitor all the time. The best time to catch a moderator is just prior to a scheduled net. Try calling five to ten minutes prior to a net, and a moderator should be available to help you.
+
+zellobug.html - Zello is opening unexpectedly.  How do I fix it? 
+The Zello Android app has a habit of keeping control of the PTT button in the background, even when its been told not to. This can cause problems if you use a second PTT app (like Teamspeak).
+Hitting the PTT button in your other app would often launch you back into Zello
+It seems a lot of people have been using old versions of Zello to avoid this behaviour, however, it's possible to fix this while using up to date versions of Zello.
+Ok, how do I fix it?The problem appears to be the "Hardware Button" mapping that Zello uses to map the PTT button. When we add the button in from scratch, Zello actually adds two buttons. Which is where the conflict begins. If you know what you're doing, it's possible to skip some of the steps below - but I've written this so anyone can follow it, no matter what they've already tried or configured.
+Note: Following these instructions to the letter, if you have any additional external PTT devices (like a bluetooth mic) these steps will remove it from Zello. Either leave it in place or add it back in at the end.
+Go into Options in Zello
+Choose "Push to talk buttons"
+From here, you'll see a screen similar to this:
+The best way to get this right is to remove anything here other than "Screen button" and "Vox" button. Delete anything else you have, like F12, Hardware Button in the example above. When you're finished, a clean slate should look like this:
+Next, click the + icon, and you'll be prompted to add a new PTT button (sorry, I couldn't screenshot this screen as the keymapping software would exit, so I took a photo):
+Click your PTT button.
+You'll be taken back to the configuration screen but Zello will have added two new buttons, one called "F12" and one called "Hardware Button".
+First, click on "Hardware button" and then choose the red "Remove button":
+Next, click on F12, and uncheck (no tick) the box marked "Handle the button in the background when possible":
+That should be it. Zello PTT will work when Zello is the active app, and you can use the PTT button in other apps when Zello is in the background.
+
+help.html - How can I help the IRN? 
+
+donations.html - How does the IRN use donations? 
+
+socialmedia.html - Does the IRN use social media? 
+
+partners.html - IRN partners and friends
+
+admin.html - Who owns and administers the IRN? 
+
+more.html - I have more questions.  How do I contact the IRN?  
