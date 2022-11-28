@@ -43,6 +43,35 @@ img.imgleft20 {
     height: auto;
   }
 
+img.imgleft10 {
+    float: left;
+    margin: 5px 20px 5px 5px;
+    width: 10%;
+    height: auto;
+  }  
+  
+img.imgleft5 {
+    float: left;
+    margin: 5px 20px 5px 5px;
+    width: 5%;
+    height: auto;
+  }  
+
+img.imgleftfixed150px {
+    float: left;
+    margin: 5px 10px 5px 5px;
+    width: 150px;
+    height: auto;
+  }    
+
+img.imgleftfixed100px {
+    float: left;
+    margin: 5px 10px 5px 5px;
+    width: 100px;
+    height: auto;
+  }    
+    
+
 img.imgright50 {
     float: right;
     margin: 5px 5px 5px 20px;
