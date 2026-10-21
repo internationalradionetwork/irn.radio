@@ -1,112 +1,59 @@
-  .aligncenter {
-    text-align: center
-  }  
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+/* Site-wide appearance. Keep the familiar IRN colours and full-width layout. */
+:root { color-scheme: light; --blue: #2196f3; --light: #f1f1f1; --text: #111; }
+* { box-sizing: border-box; }
+html { overflow-wrap: break-word; }
+body { margin: 0; background: #fff; color: var(--text); font: 15px/1.5 Verdana, sans-serif; }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid #bd6200; outline-offset: 2px; }
+img, video, iframe { max-width: 100%; height: auto; }
+.site-header { position: sticky; top: 0; z-index: 10; }
+.brand { padding: 16px; text-align: center; background: var(--blue); }
+.brand a { display: inline-block; line-height: 0; }
+.brand-wide { display: block; width: 600px; max-width: 100%; }
+.brand-small { display: none; }
+.site-nav { display: flex; align-items: stretch; justify-content: space-between; background: var(--light); }
+.nav-links { display: flex; flex-wrap: wrap; }
+.site-nav a { display: inline-block; padding: 8px 16px; text-decoration: none; white-space: nowrap; }
+.site-nav a:hover, .site-nav [aria-current="page"] { background: #fff; }
+.dashboard { margin-left: auto; }
+.site-panel { width: 100%; min-height: 0; padding: 0.01em 16px; background: #fff; display: flow-root; }
+h1, h2, h3, h4, h5 { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 400; margin: 10px 0; line-height: 1.5; }
+h1 { font-size: 36px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 20px; } h5 { font-size: 18px; }
+p { margin: 1em 0; }
+.site-footer { padding: 12px 16px; text-align: center; background: var(--light); }
+.site-footer a { display: inline-block; padding: 8px 16px; text-decoration: none; }
+.site-footer a:hover, .site-footer [aria-current="page"] { background: #fff; }
+.button { display: inline-block; padding: 8px 16px; text-decoration: none; background: var(--light); border: 0; cursor: pointer; }
+.button:hover { filter: brightness(.92); } .button.primary { background: var(--blue); color: #fff; }
+.button.success { background: #4caf50; color: #fff; } .button-large { font-size: 18px; }
+.aligncenter { text-align: center; }
+img[class*="imgleft"] { float: left; margin: 5px 20px 5px 5px; }
+img[class*="imgright"] { float: right; margin: 5px 5px 5px 20px; }
+.site-panel img.imgright30[src="media/irnpatch.jpg"] { margin: 14px 16px 20px 32px; }
+.site-panel img.email-image { display: inline-block; width: 188px; height: 20px; max-width: 100%; margin: 0 2px; vertical-align: middle; }
+.imgleft5 { width: 5%; } .imgleft10 { width: 10%; } .imgleft20 { width: 20%; }
+.imgleft30, .imgright30 { width: 30%; } .imgleft40, .imgright40 { width: 40%; }
+.imgleft50, .imgright50 { width: 50%; } .imgleftfixed100px { width: 100px; }
+.imgleftfixed150px { width: 150px; }
+.training-page .training-section { font-size: 20px; font-weight: 700; margin: 16px 0 8px; }
+.training-page .training-region { font-size: 18px; font-weight: 700; margin: 12px 0 6px; }
+.training-page .resource { margin: 0 0 14px; }
+.training-page .resource h5 { font: 700 15px/1.5 Verdana, sans-serif; margin: 0 0 3px; }
+.training-page .resource p { margin: 3px 0; }
+.training-page .resource a { overflow-wrap: anywhere; }
+@media (max-width: 800px) {
+  .site-header { position: static; }
+  .brand-wide { display: none; } .brand-small { display: block; width: 90px; }
+  .site-nav { flex-wrap: wrap; } .nav-links { justify-content: center; width: 100%; }
+  .dashboard { margin: 0 auto; } .site-nav a { padding: 8px 12px; }
+  img[class*="imgleft"], img[class*="imgright"] { width: min(36%, 220px); }
 }
-
-  div.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;  
-  }
- 
-img.imgleft50 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 50%;
-    height: auto;
-  } 
-
-img.imgleft40 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 40%;
-    height: auto;
-  }
-
-img.imgleft30 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 30%;
-    height: auto;
-  }   
-
-img.imgleft20 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 20%;
-    height: auto;
-  }
-
-img.imgleft10 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 10%;
-    height: auto;
-  }  
-  
-img.imgleft5 {
-    float: left;
-    margin: 5px 20px 5px 5px;
-    width: 5%;
-    height: auto;
-  }  
-
-img.imgleftfixed150px {
-    float: left;
-    margin: 5px 10px 5px 5px;
-    width: 150px;
-    height: auto;
-  }    
-
-img.imgleftfixed100px {
-    float: left;
-    margin: 5px 10px 5px 5px;
-    width: 100px;
-    height: auto;
-  }    
-    
-
-img.imgright50 {
-    float: right;
-    margin: 5px 5px 5px 20px;
-    width: 50%;
-    height: auto;
-  } 
-
-img.imgright40 {
-    float: right;
-    margin: 5px 5px 5px 20px;
-    width: 40%;
-    height: auto;
-  }
-
-img.imgright30 {
-    float: right;
-    margin: 5px 5px 5px 20px;
-    width: 30%;
-    height: auto;
-  }   
-
-img.imgright20 {
-    float: right;
-    margin: 5px 5px 5px 20px;
-    width: 20%;
-    height: auto;
-  }
-
-.Mobile{display:none;}
-
-@media(max-width: 600px){
-  .Desktop{
-    display:none;
-  }
-  .Mobile{
-    display:block;
-  }
+@media (max-width: 520px) {
+  .brand { padding: 10px; } .brand-small { width: 72px; }
+  .nav-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .nav-links a { text-align: center; white-space: normal; padding: 8px 3px; }
+  .site-panel { padding: 0.01em 14px; }
+  img[class*="imgleft"], img[class*="imgright"] { float: none; display: block; width: auto; max-width: min(100%, 300px); margin: 12px auto; }
+  .site-panel img.imgright30[src="media/irnpatch.jpg"] { margin: 16px auto 20px; }
+  .site-footer a { padding: 8px; }
 }
