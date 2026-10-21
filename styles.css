@@ -146,7 +146,7 @@ p {
 .site-nav {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;   /* Links on the left, Dashboard on the right */
+  justify-content: space-between;
   background: var(--light);
 }
 
@@ -166,11 +166,6 @@ p {
 .site-nav a:hover,
 .site-nav [aria-current="page"] {
   background: #fff;
-}
-
-/* Pushes the Dashboard link to the far right of the bar. */
-.dashboard {
-  margin-left: auto;
 }
 
 
@@ -355,9 +350,6 @@ img[class*="imgright"] {
   .nav-links {
     justify-content: center;
     width: 100%;
-  }
-  .dashboard {
-    margin: 0 auto;                 /* Centred instead of pushed right */
   }
   .site-nav a {
     padding: 8px 12px;              /* Slightly tighter */
