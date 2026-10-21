@@ -1,59 +1,413 @@
-/* Site-wide appearance. Keep the familiar IRN colours and full-width layout. */
-:root { color-scheme: light; --blue: #2196f3; --light: #f1f1f1; --text: #111; }
-* { box-sizing: border-box; }
-html { overflow-wrap: break-word; }
-body { margin: 0; background: #fff; color: var(--text); font: 15px/1.5 Verdana, sans-serif; }
-a { color: inherit; }
-a:focus-visible { outline: 3px solid #bd6200; outline-offset: 2px; }
-img, video, iframe { max-width: 100%; height: auto; }
-.site-header { position: sticky; top: 0; z-index: 10; }
-.brand { padding: 16px; text-align: center; background: var(--blue); }
-.brand a { display: inline-block; line-height: 0; }
-.brand-wide { display: block; width: 600px; max-width: 100%; }
-.brand-small { display: none; }
-.site-nav { display: flex; align-items: stretch; justify-content: space-between; background: var(--light); }
-.nav-links { display: flex; flex-wrap: wrap; }
-.site-nav a { display: inline-block; padding: 8px 16px; text-decoration: none; white-space: nowrap; }
-.site-nav a:hover, .site-nav [aria-current="page"] { background: #fff; }
-.dashboard { margin-left: auto; }
-.site-panel { width: 100%; min-height: 0; padding: 0.01em 16px; background: #fff; display: flow-root; }
-h1, h2, h3, h4, h5 { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 400; margin: 10px 0; line-height: 1.5; }
-h1 { font-size: 36px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 20px; } h5 { font-size: 18px; }
-p { margin: 1em 0; }
-.site-footer { padding: 12px 16px; text-align: center; background: var(--light); }
-.site-footer a { display: inline-block; padding: 8px 16px; text-decoration: none; }
-.site-footer a:hover, .site-footer [aria-current="page"] { background: #fff; }
-.button { display: inline-block; padding: 8px 16px; text-decoration: none; background: var(--light); border: 0; cursor: pointer; }
-.button:hover { filter: brightness(.92); } .button.primary { background: var(--blue); color: #fff; }
-.button.success { background: #4caf50; color: #fff; } .button-large { font-size: 18px; }
-.aligncenter { text-align: center; }
-img[class*="imgleft"] { float: left; margin: 5px 20px 5px 5px; }
-img[class*="imgright"] { float: right; margin: 5px 5px 5px 20px; }
-.site-panel img.imgright30[src="media/irnpatch.jpg"] { margin: 14px 16px 20px 32px; }
-.site-panel img.email-image { display: inline-block; width: 188px; height: 20px; max-width: 100%; margin: 0 2px; vertical-align: middle; }
-.imgleft5 { width: 5%; } .imgleft10 { width: 10%; } .imgleft20 { width: 20%; }
-.imgleft30, .imgright30 { width: 30%; } .imgleft40, .imgright40 { width: 40%; }
-.imgleft50, .imgright50 { width: 50%; } .imgleftfixed100px { width: 100px; }
-.imgleftfixed150px { width: 150px; }
-.training-page .training-section { font-size: 20px; font-weight: 700; margin: 16px 0 8px; }
-.training-page .training-region { font-size: 18px; font-weight: 700; margin: 12px 0 6px; }
-.training-page .resource { margin: 0 0 14px; }
-.training-page .resource h5 { font: 700 15px/1.5 Verdana, sans-serif; margin: 0 0 3px; }
-.training-page .resource p { margin: 3px 0; }
-.training-page .resource a { overflow-wrap: anywhere; }
-@media (max-width: 800px) {
-  .site-header { position: static; }
-  .brand-wide { display: none; } .brand-small { display: block; width: 90px; }
-  .site-nav { flex-wrap: wrap; } .nav-links { justify-content: center; width: 100%; }
-  .dashboard { margin: 0 auto; } .site-nav a { padding: 8px 12px; }
-  img[class*="imgleft"], img[class*="imgright"] { width: min(36%, 220px); }
+/* ==========================================================================
+   IRN site stylesheet
+   ==========================================================================
+
+   One stylesheet for the whole site. It keeps the familiar IRN colours
+   (blue banner, light grey bars) and the full-width layout.
+
+   HOW THIS FILE IS ORGANISED (search for the heading to jump to a section)
+   --------------------------------------------------------------------------
+    1. Settings        Colours, defined once and reused everywhere
+    2. Base            Page-wide defaults: fonts, links, images, headings
+    3. Header          Blue banner (logo) and the grey navigation bar
+    4. Content panel   The white area where each page's content lives
+    5. Footer          Grey bar at the bottom of every page
+    6. Buttons         Reusable button styles
+    7. Images          Floating/sized images inside page content
+    8. Training page   Styles used only on the Training page
+    9. Small screens   Tablet/phone adjustments (kept last on purpose)
+
+   QUICK RECIPES
+   --------------------------------------------------------------------------
+   Change the main blue          -> edit --blue in section 1.
+   Change the grey bars          -> edit --light in section 1.
+   Float a picture left/right    -> give the <img> a class such as
+                                    "imgleft20" or "imgright40" (section 7).
+   Make a button                 -> <a class="button primary">...</a>
+   Highlight the current page    -> add aria-current="page" to its nav link.
+
+   NOTE: The order of rules matters in CSS. When two rules conflict, the
+   more specific one wins; if they are equally specific, the later one wins.
+   That is why the "Small screens" section is at the very bottom.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. SETTINGS
+   Named colours ("variables"). Use them as var(--blue), var(--light), etc.
+   ========================================================================== */
+:root {
+  color-scheme: light;    /* Tell browsers this site is light-only (no auto dark mode) */
+  --blue:  #2196f3;       /* IRN blue: banner and primary buttons */
+  --light: #f1f1f1;       /* Light grey: nav bar, footer, default buttons */
+  --text:  #111;          /* Near-black body text */
 }
+
+
+/* ==========================================================================
+   2. BASE
+   Defaults that apply across the whole site.
+   ========================================================================== */
+
+/* Make width/height include padding and borders. Makes sizing predictable. */
+* {
+  box-sizing: border-box;
+}
+
+/* Let very long words or URLs wrap instead of running off the screen. */
+html {
+  overflow-wrap: break-word;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--text);
+  font: 15px/1.5 Verdana, sans-serif;   /* size / line-height  font-family */
+}
+
+/* Links take on the colour of the surrounding text (no default blue). */
+a {
+  color: inherit;
+}
+
+/* Visible orange outline for keyboard users tabbing through links. */
+a:focus-visible {
+  outline: 3px solid #bd6200;
+  outline-offset: 2px;
+}
+
+/* Media never grows wider than its container, and keeps its proportions. */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 400;       /* Normal weight rather than bold */
+  margin: 10px 0;
+  line-height: 1.5;
+}
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+
+p {
+  margin: 1em 0;
+}
+
+/* Centres text (and inline items such as images) inside the element. */
+.aligncenter {
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   3. HEADER
+   Blue banner with the logo, then the grey navigation bar underneath.
+   The whole header stays pinned to the top while scrolling (on desktop).
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;            /* Keep the header above page content when scrolling */
+}
+
+/* --- Blue banner --- */
+.brand {
+  padding: 16px;
+  text-align: center;
+  background: var(--blue);
+}
+
+.brand a {
+  display: inline-block;
+  line-height: 0;         /* Removes the small gap under inline images */
+}
+
+/* Two versions of the logo: wide for desktop, small for phones.
+   Only one is visible at a time (swapped in "Small screens" below). */
+.brand-wide {
+  display: block;
+  width: 600px;
+  max-width: 100%;
+}
+.brand-small {
+  display: none;          /* Hidden on desktop */
+}
+
+/* --- Navigation bar --- */
+.site-nav {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;   /* Links on the left, Dashboard on the right */
+  background: var(--light);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;        /* Links wrap to a second row if they don't fit */
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;  /* No underline */
+  white-space: nowrap;    /* Keep each label on one line */
+}
+
+/* Hovered link, and the link for the page you're currently on, turn white. */
+.site-nav a:hover,
+.site-nav [aria-current="page"] {
+  background: #fff;
+}
+
+/* Pushes the Dashboard link to the far right of the bar. */
+.dashboard {
+  margin-left: auto;
+}
+
+
+/* ==========================================================================
+   4. CONTENT PANEL
+   The white box that holds each page's main content.
+   ========================================================================== */
+.site-panel {
+  width: 100%;
+  min-height: 0;
+  padding: 0.01em 16px;   /* Tiny top/bottom padding stops child margins from collapsing */
+  background: #fff;
+  display: flow-root;     /* Makes the panel contain floated images */
+}
+
+
+/* ==========================================================================
+   5. FOOTER
+   ========================================================================== */
+.site-footer {
+  padding: 12px 16px;
+  text-align: center;
+  background: var(--light);
+}
+
+.site-footer a {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Same hover / current-page highlight as the navigation bar. */
+.site-footer a:hover,
+.site-footer [aria-current="page"] {
+  background: #fff;
+}
+
+
+/* ==========================================================================
+   6. BUTTONS
+   Usage:  <a class="button">Plain</a>
+           <a class="button primary">Blue</a>
+           <a class="button success button-large">Big green</a>
+   ========================================================================== */
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  background: var(--light);   /* Default: light grey */
+  border: 0;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(.92);    /* Darken slightly on hover */
+}
+
+/* Colour variants (combine with .button) */
+.button.primary {
+  background: var(--blue);
+  color: #fff;
+}
+.button.success {
+  background: #4caf50;        /* Green */
+  color: #fff;
+}
+
+/* Size variant */
+.button-large {
+  font-size: 18px;
+}
+
+
+/* ==========================================================================
+   7. IMAGES IN PAGE CONTENT
+   How it works: an <img> gets ONE class that does two jobs.
+
+     * Any class containing "imgleft"  -> image floats to the LEFT
+     * Any class containing "imgright" -> image floats to the RIGHT
+     * The number sets the width as a percentage of the page
+       (imgleft20 = 20% wide). "fixed100px" means exactly 100 pixels wide.
+
+   Examples:  <img class="imgleft20" ...>     20% wide, floats left
+              <img class="imgright40" ...>    40% wide, floats right
+              <img class="imgleftfixed150px"> 150px wide, floats left
+   ========================================================================== */
+
+/* Float direction + spacing, chosen by matching the class NAME. */
+img[class*="imgleft"] {
+  float: left;
+  margin: 5px 20px 5px 5px;     /* top right bottom left */
+}
+img[class*="imgright"] {
+  float: right;
+  margin: 5px 5px 5px 20px;
+}
+
+/* Special case: the IRN patch picture gets a bit more breathing room. */
+.site-panel img.imgright30[src="media/irnpatch.jpg"] {
+  margin: 14px 16px 20px 32px;
+}
+
+/* Inline email address images (used to hide addresses from spam bots).
+   Sits in the line of text like a word. */
+.site-panel img.email-image {
+  display: inline-block;
+  width: 188px;
+  height: 20px;
+  max-width: 100%;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+/* Widths (percentage of the page) */
+.imgleft5                        { width: 5%; }
+.imgleft10                       { width: 10%; }
+.imgleft20                       { width: 20%; }
+.imgleft30,  .imgright30         { width: 30%; }
+.imgleft40,  .imgright40         { width: 40%; }
+.imgleft50,  .imgright50         { width: 50%; }
+
+/* Widths (fixed pixels) */
+.imgleftfixed100px               { width: 100px; }
+.imgleftfixed150px               { width: 150px; }
+
+
+/* ==========================================================================
+   8. TRAINING PAGE
+   Only applies inside an element with class "training-page".
+   Structure: section title > region title > list of resources.
+   ========================================================================== */
+.training-page .training-section {      /* Big group title */
+  font-size: 20px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.training-page .training-region {       /* Sub-group title */
+  font-size: 18px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+
+.training-page .resource {              /* One entry (title, text, link) */
+  margin: 0 0 14px;
+}
+.training-page .resource h5 {           /* Entry title: bold, body-sized */
+  font: 700 15px/1.5 Verdana, sans-serif;
+  margin: 0 0 3px;
+}
+.training-page .resource p {
+  margin: 3px 0;
+}
+.training-page .resource a {            /* Break long URLs anywhere if needed */
+  overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================================
+   9. SMALL SCREENS
+   Keep this section LAST so it can override the rules above.
+   Two steps: tablets / narrow windows (800px), then phones (520px).
+   The phone rules add to the tablet rules; they don't replace them.
+   ========================================================================== */
+
+/* ---- Tablets and narrow windows: 800px wide or less ---- */
+@media (max-width: 800px) {
+
+  /* Header scrolls away normally instead of staying pinned (saves space). */
+  .site-header {
+    position: static;
+  }
+
+  /* Swap to the small logo. */
+  .brand-wide  { display: none; }
+  .brand-small { display: block; width: 90px; }
+
+  /* Nav bar: wrap onto multiple rows, links centred. */
+  .site-nav {
+    flex-wrap: wrap;
+  }
+  .nav-links {
+    justify-content: center;
+    width: 100%;
+  }
+  .dashboard {
+    margin: 0 auto;                 /* Centred instead of pushed right */
+  }
+  .site-nav a {
+    padding: 8px 12px;              /* Slightly tighter */
+  }
+
+  /* Floated images: all use one size (36% of the page, at most 220px),
+     ignoring the percentages from section 7. */
+  img[class*="imgleft"],
+  img[class*="imgright"] {
+    width: min(36%, 220px);
+  }
+}
+
+/* ---- Phones: 520px wide or less ---- */
 @media (max-width: 520px) {
-  .brand { padding: 10px; } .brand-small { width: 72px; }
-  .nav-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .nav-links a { text-align: center; white-space: normal; padding: 8px 3px; }
-  .site-panel { padding: 0.01em 14px; }
-  img[class*="imgleft"], img[class*="imgright"] { float: none; display: block; width: auto; max-width: min(100%, 300px); margin: 12px auto; }
-  .site-panel img.imgright30[src="media/irnpatch.jpg"] { margin: 16px auto 20px; }
-  .site-footer a { padding: 8px; }
+
+  /* Smaller banner. */
+  .brand       { padding: 10px; }
+  .brand-small { width: 72px; }
+
+  /* Nav links become a tidy 3-column grid; long labels may wrap. */
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .nav-links a {
+    text-align: center;
+    white-space: normal;
+    padding: 8px 3px;
+  }
+
+  .site-panel {
+    padding: 0.01em 14px;
+  }
+
+  /* Floated images stop floating: each one sits on its own line,
+     centred, at most 300px wide. */
+  img[class*="imgleft"],
+  img[class*="imgright"] {
+    float: none;
+    display: block;
+    width: auto;
+    max-width: min(100%, 300px);
+    margin: 12px auto;
+  }
+  .site-panel img.imgright30[src="media/irnpatch.jpg"] {
+    margin: 16px auto 20px;
+  }
+
+  .site-footer a {
+    padding: 8px;
+  }
 }
