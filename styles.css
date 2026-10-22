@@ -328,31 +328,52 @@ body {
 
 /* ==========================================================================
    7. BUTTONS
+   In-page buttons (e.g. "Net Schedule", "Donate using Paypal") share the
+   style of the menu buttons: navy, yellow text and border, rounded.
+   Usage:  <a class="button">Plain</a>
+           <a class="button primary">...</a>
+           <a class="button success button-large">Big</a>
+   The "primary" and "success" variants look the same as a plain button;
+   the class names are kept so existing pages need no changes.
    ========================================================================== */
 .button {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 9px 16px;
   text-decoration: none;
-  background: var(--light);
-  border: 0;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--gold);
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
   cursor: pointer;
 }
 
-.button:hover {
-  filter: brightness(.92);
+/* Hover/keyboard focus: colours swap (yellow button, navy text). */
+.button:hover,
+.button:focus-visible {
+  background: var(--gold);
+  color: var(--navy);
 }
 
-.button.primary {
-  background: var(--blue);
-  color: #fff;
-}
+.button.primary,
 .button.success {
-  background: #4caf50;
-  color: #fff;
+  color: var(--gold);
+  background: var(--navy);
+}
+.button.primary:hover,
+.button.success:hover,
+.button.primary:focus-visible,
+.button.success:focus-visible {
+  background: var(--gold);
+  color: var(--navy);
 }
 
 .button-large {
   font-size: 18px;
+  padding: 10px 24px;
 }
 
 
