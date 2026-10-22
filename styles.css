@@ -29,6 +29,11 @@
    Change the banner colour -> edit --banner in section 1.
    Change the menu buttons  -> edit --navy / --gold / --red in section 1.
    Make the menu wider      -> edit --menu-width in section 1.
+   Change the text size     -> edit the font size in "body" (section 2).
+
+   SIZES: text, buttons, spacing and the menu width use rem units, which
+   follow the visitor's own browser text-size setting (1rem = 16px by
+   default). Fine details such as borders and the gold line stay in pixels.
    ========================================================================== */
 
 
@@ -44,7 +49,7 @@
   --red:  #9e2229;        /* Current page: the red of the IRN patch */
   --light: #f1f1f1;       /* Light grey: default (plain) buttons */
   --text:  #111;          /* Near-black body text */
-  --menu-width: 200px;    /* Width of the left-hand menu */
+  --menu-width: 13rem;     /* Width of the left-hand menu */
 }
 
 
@@ -63,7 +68,7 @@ body {
   margin: 0;
   background: #fff;
   color: var(--text);
-  font: 15px/1.5 Verdana, sans-serif;
+  font: 1.0625rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 17px at the default browser size */
 }
 
 a {
@@ -83,16 +88,16 @@ iframe {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: inherit;          /* Same font (Verdana) as the body text */
   font-weight: 400;
   margin: 10px 0;
   line-height: 1.5;
 }
-h1 { font-size: 36px; }
-h2 { font-size: 30px; }
-h3 { font-size: 24px; }
-h4 { font-size: 20px; }
-h5 { font-size: 18px; }
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
 
 p {
   margin: 1em 0;
@@ -179,13 +184,13 @@ body {
 .nav-links {
   display: flex;
   flex-direction: column;        /* Buttons stacked vertically */
-  gap: 10px;
-  padding: 16px;
+  gap: .625rem;
+  padding: 1rem;
 }
 
 .site-nav a {
   display: block;
-  padding: 9px 16px;
+  padding: .5625rem 1rem;
   text-decoration: none;
   text-align: center;
   font-weight: 700;
@@ -219,9 +224,15 @@ body {
   min-width: 0;
   min-height: 0;
   overflow-y: auto;              /* The ONLY part of the page that scrolls */
-  padding: 0.01em 24px;
+  padding: 0.01em 1.5rem;
   background: #fff;
   display: flow-root;            /* Contains floated images */
+}
+
+/* Bulleted lists sit beside floated images instead of underneath them,
+   so the bullets are never hidden behind a picture. */
+.site-panel ul {
+  display: flow-root;
 }
 
 
@@ -239,16 +250,16 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  gap: 8px;
+  gap: .5rem;
   align-self: end;
-  padding: 16px;
+  padding: 1rem;
 }
 
 .site-footer a {
   position: relative;
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
   font-size: 0;                  /* Hides the text; it is still there for screen readers */
   text-decoration: none;
@@ -262,7 +273,7 @@ body {
 .site-footer a::before {
   content: "";
   position: absolute;
-  inset: 6px;
+  inset: .375rem;
   background-color: var(--gold);
   -webkit-mask: var(--icon) center / contain no-repeat;
   mask: var(--icon) center / contain no-repeat;
@@ -294,11 +305,11 @@ body {
   position: absolute;
   left: 0;
   bottom: 100%;
-  margin-bottom: 8px;
-  padding: 3px 8px;
+  margin-bottom: .5rem;
+  padding: .2rem .5rem;
   display: none;
   white-space: nowrap;
-  font: 700 13px/1.4 Verdana, sans-serif;
+  font: 700 .875rem/1.4 Verdana, Geneva, "DejaVu Sans", sans-serif;
   color: var(--gold);
   background: var(--navy);
   border-radius: 4px;
@@ -338,7 +349,7 @@ body {
    ========================================================================== */
 .button {
   display: inline-block;
-  padding: 9px 16px;
+  padding: .5625rem 1rem;
   text-decoration: none;
   text-align: center;
   font-weight: 700;
@@ -372,8 +383,8 @@ body {
 }
 
 .button-large {
-  font-size: 18px;
-  padding: 10px 24px;
+  font-size: 1.125rem;
+  padding: .625rem 1.5rem;
 }
 
 
@@ -419,13 +430,13 @@ img[class*="imgright"] {
    9. TRAINING PAGE
    ========================================================================== */
 .training-page .training-section {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 700;
   margin: 16px 0 8px;
 }
 
 .training-page .training-region {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 12px 0 6px;
 }
@@ -434,7 +445,9 @@ img[class*="imgright"] {
   margin: 0 0 14px;
 }
 .training-page .resource h5 {
-  font: 700 15px/1.5 Verdana, sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.5;
   margin: 0 0 3px;
 }
 .training-page .resource p {
@@ -452,8 +465,8 @@ img[class*="imgright"] {
    back to the standard one: banner, then a horizontal menu, then content.
    ========================================================================== */
 
-/* ---- Tablets and narrow windows: 800px wide or less ---- */
-@media (max-width: 800px) {
+/* ---- Tablets and narrow windows: 50em (about 800px) wide or less ---- */
+@media (max-width: 50em) {
 
   body {
     display: block;              /* Drop the grid; stack everything */
@@ -477,11 +490,11 @@ img[class*="imgright"] {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 12px 16px;
+    padding: .75rem 1rem;
   }
   .site-nav a {
     display: inline-block;
-    padding: 8px 12px;
+    padding: .5rem .75rem;
     white-space: nowrap;
   }
 
@@ -495,8 +508,8 @@ img[class*="imgright"] {
   }
 }
 
-/* ---- Phones: 520px wide or less ---- */
-@media (max-width: 520px) {
+/* ---- Phones: 32.5em (about 520px) wide or less ---- */
+@media (max-width: 32.5em) {
 
   .brand       { padding: 10px; }
   .brand-small { width: 72px; }
@@ -504,13 +517,13 @@ img[class*="imgright"] {
   .nav-links {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-    padding: 10px 14px;
+    gap: .375rem;
+    padding: .625rem .875rem;
   }
   .nav-links a {
     text-align: center;
     white-space: normal;
-    padding: 8px 3px;
+    padding: .5rem .2rem;
   }
 
   .site-panel {
@@ -530,6 +543,6 @@ img[class*="imgright"] {
   }
 
   .site-footer {
-    padding: 8px 14px 16px;
+    padding: .5rem .875rem 1rem;
   }
 }
