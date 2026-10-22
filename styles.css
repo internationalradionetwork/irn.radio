@@ -140,6 +140,21 @@ body {
   padding: 16px;
   text-align: center;
   background: var(--banner);
+  position: relative;            /* Anchors the gold line below */
+}
+
+/* Gold line across the full width of the banner, a few pixels above its
+   bottom edge. The banner never scrolls, so the line stays put too.
+   Change "height" for a thicker/thinner line, "bottom" to move it. */
+.brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 3px;
+  background: var(--gold);
+  pointer-events: none;
 }
 
 .brand a {
