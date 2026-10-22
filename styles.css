@@ -68,7 +68,7 @@ body {
   margin: 0;
   background: #fff;
   color: var(--text);
-  font: 1.0625rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 17px at the default browser size */
+  font: 0.9375rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 15px at the default browser size */
 }
 
 a {
