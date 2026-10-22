@@ -16,9 +16,9 @@
     1. Settings        Colours and menu width
     2. Base            Fonts, links, images, headings
     3. Page layout     The grid: banner / menu / content / footer
-    4. Header          Blue banner and the left-hand menu
+    4. Header          Banner and the left-hand menu
     5. Content panel   The white area for each page's content
-    6. Footer          Grey bar at the bottom
+    6. Footer          Icon buttons at the bottom left
     7. Buttons         Reusable button styles
     8. Images          Floating/sized images inside page content
     9. Training page   Styles used only on the Training page
@@ -26,7 +26,7 @@
 
    QUICK RECIPES
    --------------------------------------------------------------------------
-   Change the main blue     -> edit --blue in section 1.
+   Change the banner colour -> edit --banner in section 1.
    Change the menu buttons  -> edit --navy / --gold / --red in section 1.
    Make the menu wider      -> edit --menu-width in section 1.
    ========================================================================== */
@@ -37,7 +37,8 @@
    ========================================================================== */
 :root {
   color-scheme: light;
-  --blue:  #2196f3;       /* IRN blue: banner and primary buttons */
+  --banner: #296eae;      /* Banner background: the map blue just above "INTERNATIONAL" in the IRN patch */
+  --blue:  #2196f3;       /* Bright IRN blue: primary buttons */
   --navy: #141a4a;        /* Menu buttons: the navy of the header logo */
   --gold: #f2dc4f;        /* Button border and text: the logo's yellow frame */
   --red:  #9e2229;        /* Current page: the red of the IRN patch */
@@ -134,11 +135,11 @@ body {
    4. HEADER
    ========================================================================== */
 
-/* --- Blue banner --- */
+/* --- Banner --- */
 .brand {
   padding: 16px;
   text-align: center;
-  background: var(--blue);
+  background: var(--banner);
 }
 
 .brand a {
