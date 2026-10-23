@@ -534,7 +534,7 @@ img[class*="imgright"] {
 
 /* ---- Tablets held upright (portrait): explicit text size and hidden patch ----
    Directly targets all body text elements for identical Firefox and Chrome rendering. ---- */
-@media (max-width: 84em) and (orientation: portrait) {
+@media (min-width: 32.51em) and (max-width: 84em) and (orientation: portrait) {
   body, p, li, td {
     font-size: 1.25rem !important;
   }
