@@ -67,9 +67,7 @@ body {
   margin: 0;
   background: #fff;
   color: var(--text);
-  font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  font: 1.0000rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 16px at the default browser size */
 }
 
 a {
@@ -233,6 +231,10 @@ body {
   padding: 0.01em 1.5rem;
   background: #fff;
   display: flow-root;            /* Contains floated images */
+
+  /* --- Container Query Setup --- */
+  container-type: inline-size;   /* Tracks the width of the panel */
+  container-name: content-panel; /* Names the container for reference */
 }
 
 /* Bulleted lists sit beside floated images instead of underneath them,
@@ -476,19 +478,19 @@ img[class*="imgright"] {
 
 
 /* ==========================================================================
-   10. SMALL SCREENS & TABLETS
+   10. SMALL SCREENS & CONTAINER QUERIES
    Keep this section LAST so it can override the rules above.
    ========================================================================== */
 
 /* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
-@media (min-width: 84.01em) and (max-height: 800px) {
+@media (min-width: 64.01em) and (max-height: 800px) {
   .brand       { padding: 8px 16px 12px; }
   .brand-wide  { width: 420px; }
 }
 
-/* ---- Tablets and narrow windows ----
-   Switches layout to top banner and horizontal menu on smaller viewports. ---- */
-@media (max-width: 84em),
+/* ---- Global Layout Switch (Viewport Media Query) ----
+   Switches from side-menu grid to top banner/stacked layout on narrow viewports. ---- */
+@media (max-width: 64em),
        (pointer: coarse) and (max-height: 52em) {
 
   body {
@@ -517,7 +519,7 @@ img[class*="imgright"] {
   }
   .site-nav a {
     display: inline-block;
-    padding: .625rem 1rem;       /* Comfortable touch size on tablets */
+    padding: .625rem 1rem;
     white-space: nowrap;
   }
 
@@ -531,22 +533,22 @@ img[class*="imgright"] {
   }
 }
 
-/* ---- Tablets held upright (portrait): larger text and hidden patch ----
-   Explicitly target root/body font sizes for consistent behavior in Firefox and Chrome. ---- */
-@media (max-width: 84em) and (orientation: portrait) {
-  :root {
-    font-size: 108%;
-  }
-  body, p, li {
-    font-size: 1.15rem;
-  }
-  .site-nav a {
-    font-size: 1rem;
-  }
+
+/* ---- Component-Level Rules (Container Query) ----
+   Applies rules based purely on how much width the .site-panel has, 
+   completely bypassing browser-specific viewport rendering discrepancies. ---- */
+@container content-panel (max-width: 700px) {
+  /* Hide the decorative IRN patch when the panel is constrained */
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
   }
+
+  /* Fluid typography scaled directly to the container's width (cqw) */
+  body, p, li {
+    font-size: clamp(1.15rem, 2.5cqw, 1.25rem);
+  }
 }
+
 
 /* ---- Phones: 32.5em (about 520px) wide or less ---- */
 @media (max-width: 32.5em) {
@@ -575,16 +577,13 @@ img[class*="imgright"] {
     margin: 12px auto;
   }
 
-  .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
-    display: none;
-  }
-
   .site-footer {
     padding: .5rem .875rem 1rem;
   }
 }
 
-/* ---- Short screens (phones held sideways): a slimmer banner leaves room for content ---- */
+
+/* ---- Short screens (phones held sideways) ---- */
 @media (max-height: 30em) {
   .brand       { padding: 6px 10px 10px; }
   .brand-small { width: 56px; }
