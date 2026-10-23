@@ -535,9 +535,9 @@ img[class*="imgright"] {
 
 
 /* ---- Component-Level Rules (Container Query) ----
-   Applies rules based purely on how much width the .site-panel has, 
-   completely bypassing browser-specific viewport rendering discrepancies. ---- */
-@container content-panel (max-width: 700px) {
+   Raised threshold to 820px so an 800px portrait tablet (~768px content width) 
+   safely triggers the larger text and hides the patch in both Chrome and Firefox. ---- */
+@container content-panel (max-width: 820px) {
   /* Hide the decorative IRN patch when the panel is constrained */
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
