@@ -1,15 +1,11 @@
 /* ==========================================================================
-   IRN site stylesheet - SIDEBAR THEME
+   IRN site stylesheet
    ==========================================================================
 
-   Alternate theme: banner across the top, menu buttons down the left side,
+   Layout: banner across the top, menu buttons down the left side,
    three small icon buttons at the bottom left, content on the right.
-   No grey bars. Same colours and the same HTML as the standard
-   theme, so no page markup needs to change. To switch themes, change
-   the one line in each page's <head>:
-
-       <link rel="stylesheet" href="styles.css">           (standard)
-       <link rel="stylesheet" href="styles-sidebar.css">   (sidebar)
+   No grey bars. On narrow screens the layout falls back to a banner,
+   a horizontal menu, then the content (see section 10).
 
    SECTIONS
    --------------------------------------------------------------------------
@@ -89,7 +85,7 @@ iframe {
 
 h1, h2, h3, h4, h5 {
   font-family: inherit;          /* Same font (Verdana) as the body text */
-  font-weight: 400;
+  font-weight: 700;
   margin: 10px 0;
   line-height: 1.5;
 }
@@ -98,6 +94,11 @@ h2 { font-size: 1.875rem; }
 h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 h5 { font-size: 1.125rem; }
+
+/* FAQ-style pages: a question (h3) and its sub-headings (h4) keep the sizes
+   of a smaller heading level while the heading order stays h2 > h3 > h4. */
+.sub-heading     { font-size: 1.25rem;  font-style: normal; }
+.sub-sub-heading { font-size: 1.125rem; }
 
 p {
   margin: 1em 0;
@@ -231,8 +232,15 @@ body {
 
 /* Bulleted lists sit beside floated images instead of underneath them,
    so the bullets are never hidden behind a picture. */
-.site-panel ul {
+.site-panel ul,
+.site-panel ol {
   display: flow-root;
+}
+
+/* A block that must wrap around its own floated image (Software page). */
+.software-item {
+  display: flow-root;
+  margin: 1rem 0;
 }
 
 
@@ -402,7 +410,7 @@ img[class*="imgright"] {
   margin: 5px 5px 5px 20px;
 }
 
-.site-panel img.imgright30[src="media/irnpatch.jpg"] {
+.site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
   margin: 14px 16px 20px 32px;
 }
 
@@ -444,6 +452,7 @@ img[class*="imgright"] {
 .training-page .resource {
   margin: 0 0 14px;
 }
+.training-page .resource h4,
 .training-page .resource h5 {
   font-size: 1em;
   font-weight: 700;
@@ -464,6 +473,12 @@ img[class*="imgright"] {
    On narrow screens there is no room for a side menu, so the layout falls
    back to the standard one: banner, then a horizontal menu, then content.
    ========================================================================== */
+
+/* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
+@media (min-width: 50.01em) and (max-height: 800px) {
+  .brand       { padding: 8px 16px 12px; }
+  .brand-wide  { width: 420px; }
+}
 
 /* ---- Tablets and narrow windows: 50em (about 800px) wide or less ---- */
 @media (max-width: 50em) {
@@ -515,15 +530,11 @@ img[class*="imgright"] {
   .brand-small { width: 72px; }
 
   .nav-links {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: .375rem;
     padding: .625rem .875rem;
   }
-  .nav-links a {
-    text-align: center;
-    white-space: normal;
-    padding: .5rem .2rem;
+  .site-nav a {
+    padding: .5rem .625rem;      /* Buttons wrap onto extra rows; no word is ever split */
   }
 
   .site-panel {
@@ -538,8 +549,10 @@ img[class*="imgright"] {
     max-width: min(100%, 300px);
     margin: 12px auto;
   }
-  .site-panel img.imgright30[src="media/irnpatch.jpg"] {
-    margin: 16px auto 20px;
+  /* The decorative IRN patch is hidden on phones so the text starts sooner.
+     Delete this rule to show it again. */
+  .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
+    display: none;
   }
 
   .site-footer {
