@@ -66,7 +66,10 @@ body {
   margin: 0;
   background: #fff;
   color: var(--text);
-  font: 1.0000rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 16px at the default browser size */
+  /* Fluid body text scaling across standard screen ranges */
+  font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.2rem);
+  line-height: 1.6;
 }
 
 a {
@@ -473,23 +476,21 @@ img[class*="imgright"] {
 
 
 /* ==========================================================================
-   10. SMALL SCREENS
+   10. SMALL SCREENS & TABLETS
    Keep this section LAST so it can override the rules above.
-   On narrow screens there is no room for a side menu, so the layout falls
-   back to the standard one: banner, then a horizontal menu, then content.
    ========================================================================== */
 
 /* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
-@media (min-width: 75.01em) and (max-height: 800px) {
+@media (min-width: 64.01em) and (max-height: 800px) {
   .brand       { padding: 8px 16px 12px; }
   .brand-wide  { width: 420px; }
 }
 
 /* ---- Tablets and narrow windows ----
-   Expanded max-width to 75em (approx 1200px) to catch modern larger tablets
-   in portrait and landscape orientation. ---- */
-@media (max-width: 75em),
-       (pointer: coarse) and (max-height: 50em) {
+   Covers narrow viewports (<= 64em / ~1024px) or touch screens held in landscape
+   where vertical space is limited. Switches to the stacked banner/menu layout. ---- */
+@media (max-width: 64em),
+       (pointer: coarse) and (max-height: 52em) {
 
   body {
     display: block;              /* Drop the grid; stack everything */
@@ -507,7 +508,7 @@ img[class*="imgright"] {
   }
 
   .brand-wide  { display: none; }
-  .brand-small { display: block; width: 120px; }   /* Phones shrink this below */
+  .brand-small { display: block; width: 120px; }
 
   .nav-links {
     flex-direction: row;
@@ -532,17 +533,17 @@ img[class*="imgright"] {
 }
 
 /* ---- Tablets held upright (portrait) ---- */
-@media (max-width: 75em) and (orientation: portrait) {
+@media (max-width: 64em) and (orientation: portrait) {
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
   }
 }
 
 /* ---- Tablets held upright: larger text ----
-   Expanded range up to 75em to reliably scale fonts on modern tablets. */
-@media (min-width: 32.51em) and (max-width: 75em) and (orientation: portrait) {
+   Ensure portrait screens (e.g., 800px / 50em width) display comfortable, readable text. */
+@media (min-width: 32.51em) and (max-width: 60em) and (orientation: portrait) {
   body {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   .site-nav a {
     font-size: 1rem;
@@ -560,7 +561,7 @@ img[class*="imgright"] {
     padding: .625rem .875rem;
   }
   .site-nav a {
-    padding: .5rem .625rem;      /* Buttons wrap onto extra rows; no word is ever split */
+    padding: .5rem .625rem;
   }
 
   .site-panel {
@@ -575,7 +576,7 @@ img[class*="imgright"] {
     max-width: min(100%, 300px);
     margin: 12px auto;
   }
-  /* The decorative IRN patch is hidden on phones so the text starts sooner. */
+
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
   }
@@ -584,7 +585,6 @@ img[class*="imgright"] {
     padding: .5rem .875rem 1rem;
   }
 }
-
 
 /* ---- Short screens (phones held sideways): a slimmer banner leaves room for content ---- */
 @media (max-height: 30em) {
