@@ -480,20 +480,15 @@ img[class*="imgright"] {
    ========================================================================== */
 
 /* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
-@media (min-width: 64.01em) and (max-height: 800px) {
+@media (min-width: 75.01em) and (max-height: 800px) {
   .brand       { padding: 8px 16px 12px; }
   .brand-wide  { width: 420px; }
 }
 
 /* ---- Tablets and narrow windows ----
-   The stacked layout (banner, horizontal menu, content) is used when:
-   - the window is 64em (about 1024px) wide or less. This covers tablets in
-     portrait, including iPads at 810-834px wide, which are wider than the
-     old 800px limit and so wrongly got the side menu; OR
-   - the screen is a touch screen that is short (800px or less), which is a
-     tablet held in landscape. There the fixed-height side menu was cut off
-     and hard to scroll, so the whole page scrolls instead. ---- */
-@media (max-width: 64em),
+   Expanded max-width to 75em (approx 1200px) to catch modern larger tablets
+   in portrait and landscape orientation. ---- */
+@media (max-width: 75em),
        (pointer: coarse) and (max-height: 50em) {
 
   body {
@@ -536,25 +531,18 @@ img[class*="imgright"] {
   }
 }
 
-/* ---- Tablets held upright (portrait) ----
-   With a picture floated on each side, the text is squeezed into a narrow
-   column. The decorative IRN patch is hidden here (as on phones) so the text
-   gets the full width beside the left-hand picture. Delete this rule to show
-   the patch again. Landscape tablets are wide enough and keep it. */
-@media (max-width: 64em) and (orientation: portrait) {
+/* ---- Tablets held upright (portrait) ---- */
+@media (max-width: 75em) and (orientation: portrait) {
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
   }
 }
 
 /* ---- Tablets held upright: larger text ----
-   16px text looks small on a screen this wide. Only the body text grows (to
-   20px at the default browser size); headings, menu buttons and footer icons
-   keep their sizes. Change 1.25rem to 1.125rem for a smaller increase.
-   Phones (under 520px wide) and landscape are not affected. */
-@media (min-width: 32.51em) and (max-width: 64em) and (orientation: portrait) {
+   Expanded range up to 75em to reliably scale fonts on modern tablets. */
+@media (min-width: 32.51em) and (max-width: 75em) and (orientation: portrait) {
   body {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
   .site-nav a {
     font-size: 1rem;
@@ -587,8 +575,7 @@ img[class*="imgright"] {
     max-width: min(100%, 300px);
     margin: 12px auto;
   }
-  /* The decorative IRN patch is hidden on phones so the text starts sooner.
-     Delete this rule to show it again. */
+  /* The decorative IRN patch is hidden on phones so the text starts sooner. */
   .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
     display: none;
   }
@@ -599,8 +586,7 @@ img[class*="imgright"] {
 }
 
 
-/* ---- Short screens (phones held sideways): a slimmer banner leaves room for content ----
-   Kept at the very end so it overrides the tablet and phone rules above. */
+/* ---- Short screens (phones held sideways): a slimmer banner leaves room for content ---- */
 @media (max-height: 30em) {
   .brand       { padding: 6px 10px 10px; }
   .brand-small { width: 56px; }
