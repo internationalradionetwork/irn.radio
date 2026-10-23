@@ -547,6 +547,20 @@ img[class*="imgright"] {
   }
 }
 
+/* ---- Tablets held upright: larger text ----
+   16px text looks small on a screen this wide. Only the body text grows (to
+   20px at the default browser size); headings, menu buttons and footer icons
+   keep their sizes. Change 1.25rem to 1.125rem for a smaller increase.
+   Phones (under 520px wide) and landscape are not affected. */
+@media (min-width: 32.51em) and (max-width: 64em) and (orientation: portrait) {
+  body {
+    font-size: 1.25rem;
+  }
+  .site-nav a {
+    font-size: 1rem;
+  }
+}
+
 /* ---- Phones: 32.5em (about 520px) wide or less ---- */
 @media (max-width: 32.5em) {
 
