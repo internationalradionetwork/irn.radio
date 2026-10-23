@@ -535,10 +535,10 @@ img[class*="imgright"] {
    Explicitly target root/body font sizes for consistent behavior in Firefox and Chrome. ---- */
 @media (max-width: 84em) and (orientation: portrait) {
   :root {
-    font-size: 115%;
+    font-size: 108%;
   }
   body, p, li {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
   .site-nav a {
     font-size: 1rem;
