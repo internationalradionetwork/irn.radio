@@ -59,6 +59,7 @@
 html {
   overflow-wrap: break-word;
   -webkit-text-size-adjust: 100%;   /* Stops iPads resizing text when rotated */
+  -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
@@ -66,9 +67,8 @@ body {
   margin: 0;
   background: #fff;
   color: var(--text);
-  /* Fluid body text scaling across standard screen ranges */
   font-family: Verdana, Geneva, "DejaVu Sans", sans-serif;
-  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.2rem);
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -487,8 +487,7 @@ img[class*="imgright"] {
 }
 
 /* ---- Tablets and narrow windows ----
-   Expanded threshold to 84em (~1344px) to reliably capture 800px portrait tablets 
-   across all browsers (including Chrome and Firefox) and switch to stacked layout. ---- */
+   Switches layout to top banner and horizontal menu on smaller viewports. ---- */
 @media (max-width: 84em),
        (pointer: coarse) and (max-height: 52em) {
 
@@ -533,10 +532,12 @@ img[class*="imgright"] {
 }
 
 /* ---- Tablets held upright (portrait): larger text and hidden patch ----
-   Strictly targets portrait orientation up to 84em to ensure Chrome and Firefox 
-   both apply the larger font size and successfully hide the patch. ---- */
+   Explicitly target root/body font sizes for consistent behavior in Firefox and Chrome. ---- */
 @media (max-width: 84em) and (orientation: portrait) {
-  body {
+  :root {
+    font-size: 115%;
+  }
+  body, p, li {
     font-size: 1.25rem;
   }
   .site-nav a {
