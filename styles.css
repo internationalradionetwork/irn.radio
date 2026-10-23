@@ -1,0 +1,566 @@
+/* ==========================================================================
+   IRN site stylesheet
+   ==========================================================================
+
+   Layout: banner across the top, menu buttons down the left side,
+   three small icon buttons at the bottom left, content on the right.
+   No grey bars. On narrow screens the layout falls back to a banner,
+   a horizontal menu, then the content (see section 10).
+
+   SECTIONS
+   --------------------------------------------------------------------------
+    1. Settings        Colours and menu width
+    2. Base            Fonts, links, images, headings
+    3. Page layout     The grid: banner / menu / content / footer
+    4. Header          Banner and the left-hand menu
+    5. Content panel   The white area for each page's content
+    6. Footer          Icon buttons at the bottom left
+    7. Buttons         Reusable button styles
+    8. Images          Floating/sized images inside page content
+    9. Training page   Styles used only on the Training page
+   10. Small screens   Tablet/phone adjustments (kept last on purpose)
+
+   QUICK RECIPES
+   --------------------------------------------------------------------------
+   Change the banner colour -> edit --banner in section 1.
+   Change the menu buttons  -> edit --navy / --gold / --red in section 1.
+   Make the menu wider      -> edit --menu-width in section 1.
+   Change the text size     -> edit the font size in "body" (section 2).
+
+   SIZES: text, buttons, spacing and the menu width use rem units, which
+   follow the visitor's own browser text-size setting (1rem = 16px by
+   default). Fine details such as borders and the gold line stay in pixels.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. SETTINGS
+   ========================================================================== */
+:root {
+  color-scheme: light;
+  --banner: #296eae;      /* Banner background: the map blue just above "INTERNATIONAL" in the IRN patch */
+  --blue:  #2196f3;       /* Bright IRN blue: primary buttons */
+  --navy: #141a4a;        /* Menu buttons: the navy of the header logo */
+  --gold: #f2dc4f;        /* Button border and text: the logo's yellow frame */
+  --red:  #9e2229;        /* Current page: the red of the IRN patch */
+  --light: #f1f1f1;       /* Light grey: default (plain) buttons */
+  --text:  #111;          /* Near-black body text */
+  --menu-width: 13rem;     /* Width of the left-hand menu */
+}
+
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-wrap: break-word;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--text);
+  font: 1.0000rem/1.6 Verdana, Geneva, "DejaVu Sans", sans-serif;   /* 16px at the default browser size */
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible {
+  outline: 3px solid #bd6200;
+  outline-offset: 2px;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: inherit;          /* Same font (Verdana) as the body text */
+  font-weight: 700;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+
+/* FAQ-style pages: a question (h3) and its sub-headings (h4) keep the sizes
+   of a smaller heading level while the heading order stays h2 > h3 > h4. */
+.sub-heading     { font-size: 1.25rem;  font-style: normal; }
+.sub-sub-heading { font-size: 1.125rem; }
+
+p {
+  margin: 1em 0;
+}
+
+.aligncenter {
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   3. PAGE LAYOUT
+   The <body> is a grid with two columns (menu | content) and three rows
+   (banner / main area / footer). The body is exactly one screen tall and
+   does not scroll: the banner, menu and footer links stay put, and only
+   the content panel scrolls (see section 5). The header's wrapper is "dissolved"
+   (display: contents) so the banner and the menu can be placed in the grid
+   separately, without changing the HTML.
+   ========================================================================== */
+body {
+  display: grid;
+  grid-template-columns: var(--menu-width) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100vh;                 /* Page is exactly one screen tall... */
+  height: 100dvh;                /* (phone-friendly version where supported) */
+  overflow: hidden;              /* ...so the page itself never scrolls. */
+}
+
+.site-header {
+  display: contents;
+}
+
+.brand        { grid-column: 1 / -1; grid-row: 1; }       /* Banner: full width, top */
+.site-nav     { grid-column: 1;      grid-row: 2; }       /* Menu buttons: left column */
+.site-footer  { grid-column: 1;      grid-row: 3; }       /* Footer links: bottom left */
+.site-panel   { grid-column: 2;      grid-row: 2 / 4; }   /* Content: right, full height */
+
+
+/* ==========================================================================
+   4. HEADER
+   ========================================================================== */
+
+/* --- Banner --- */
+.brand {
+  padding: 16px;
+  text-align: center;
+  background: var(--banner);
+  position: relative;            /* Anchors the gold line below */
+}
+
+/* Gold line across the full width of the banner, a few pixels above its
+   bottom edge. The banner never scrolls, so the line stays put too.
+   Change "height" for a thicker/thinner line, "bottom" to move it. */
+.brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 3px;
+  background: var(--gold);
+  pointer-events: none;
+}
+
+.brand a {
+  display: inline-block;
+  line-height: 0;
+}
+
+.brand-wide {
+  display: block;
+  width: 600px;
+  max-width: 100%;
+}
+.brand-small {
+  display: none;
+}
+
+/* --- Left-hand menu: one button per page --- */
+.site-nav {
+  overflow-y: auto;              /* Only scrolls if the window is very short */
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;        /* Buttons stacked vertically */
+  gap: .625rem;
+  padding: 1rem;
+}
+
+.site-nav a {
+  display: block;
+  padding: .5625rem 1rem;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--gold);
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+}
+
+/* Hover: colours swap (yellow button, navy text). */
+.site-nav a:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* Current page: IRN-patch red with the yellow frame, pressed in. */
+.site-nav [aria-current="page"],
+.site-nav [aria-current="page"]:hover {
+  background: var(--red);
+  color: #fff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .4);
+}
+
+
+/* ==========================================================================
+   5. CONTENT PANEL
+   ========================================================================== */
+.site-panel {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;              /* The ONLY part of the page that scrolls */
+  padding: 0.01em 1.5rem;
+  background: #fff;
+  display: flow-root;            /* Contains floated images */
+}
+
+/* Bulleted lists sit beside floated images instead of underneath them,
+   so the bullets are never hidden behind a picture. */
+.site-panel ul,
+.site-panel ol {
+  display: flow-root;
+}
+
+/* A block that must wrap around its own floated image (Software page). */
+.software-item {
+  display: flow-root;
+  margin: 1rem 0;
+}
+
+
+/* ==========================================================================
+   6. FOOTER
+   The three footer links become small icon buttons in a row at the bottom
+   of the left column. The HTML is unchanged: each link is recognised by its
+   address (about.html, donate.html, contact.html), its text is hidden
+   (screen readers still read it) and an icon is drawn instead. Hovering
+   or tabbing to a button shows a small label.
+
+   To change an icon, replace the SVG path in the matching rule below.
+   ========================================================================== */
+.site-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: .5rem;
+  align-self: end;
+  padding: 1rem;
+}
+
+.site-footer a {
+  position: relative;
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 0;                  /* Hides the text; it is still there for screen readers */
+  text-decoration: none;
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+}
+
+/* The icon: a yellow shape cut out with a mask, so it can change colour. */
+.site-footer a::before {
+  content: "";
+  position: absolute;
+  inset: .375rem;
+  background-color: var(--gold);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+/* Hover/focus: colours swap, like the menu buttons. */
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  background: var(--gold);
+}
+.site-footer a:hover::before,
+.site-footer a:focus-visible::before {
+  background-color: var(--navy);
+}
+
+/* Current page: red, like the menu. */
+.site-footer [aria-current="page"],
+.site-footer [aria-current="page"]:hover {
+  background: var(--red);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .4);
+}
+.site-footer [aria-current="page"]::before,
+.site-footer [aria-current="page"]:hover::before {
+  background-color: #fff;
+}
+
+/* Small label shown above the button on hover or keyboard focus. */
+.site-footer a::after {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin-bottom: .5rem;
+  padding: .2rem .5rem;
+  display: none;
+  white-space: nowrap;
+  font: 700 .875rem/1.4 Verdana, Geneva, "DejaVu Sans", sans-serif;
+  color: var(--gold);
+  background: var(--navy);
+  border-radius: 4px;
+  z-index: 20;
+}
+.site-footer a:hover::after,
+.site-footer a:focus-visible::after {
+  display: block;
+}
+
+/* --- The three icons and labels --- */
+.site-footer a[href="about.html"] {      /* "i" in a circle */
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E");
+}
+.site-footer a[href="about.html"]::after   { content: "About the IRN"; }
+
+.site-footer a[href="donate.html"] {     /* heart */
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+}
+.site-footer a[href="donate.html"]::after  { content: "Donate"; }
+
+.site-footer a[href="contact.html"] {    /* envelope */
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E");
+}
+.site-footer a[href="contact.html"]::after { content: "Contact us"; }
+
+
+/* ==========================================================================
+   7. BUTTONS
+   In-page buttons (e.g. "Net Schedule", "Donate using Paypal") share the
+   style of the menu buttons: navy, yellow text and border, rounded.
+   Usage:  <a class="button">Plain</a>
+           <a class="button primary">...</a>
+           <a class="button success button-large">Big</a>
+   The "primary" and "success" variants look the same as a plain button;
+   the class names are kept so existing pages need no changes.
+   ========================================================================== */
+.button {
+  display: inline-block;
+  padding: .5625rem 1rem;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--gold);
+  background: var(--navy);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
+  cursor: pointer;
+}
+
+/* Hover/keyboard focus: colours swap (yellow button, navy text). */
+.button:hover,
+.button:focus-visible {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.button.primary,
+.button.success {
+  color: var(--gold);
+  background: var(--navy);
+}
+.button.primary:hover,
+.button.success:hover,
+.button.primary:focus-visible,
+.button.success:focus-visible {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.button-large {
+  font-size: 1.125rem;
+  padding: .625rem 1.5rem;
+}
+
+
+/* ==========================================================================
+   8. IMAGES IN PAGE CONTENT
+   Class containing "imgleft"/"imgright" floats the image; the number is the
+   width as a percentage of the content area (imgleft20 = 20%).
+   ========================================================================== */
+img[class*="imgleft"] {
+  float: left;
+  margin: 5px 20px 5px 5px;
+}
+img[class*="imgright"] {
+  float: right;
+  margin: 5px 5px 5px 20px;
+}
+
+.site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
+  margin: 14px 16px 20px 32px;
+}
+
+.site-panel img.email-image {
+  display: inline-block;
+  width: 188px;
+  height: 20px;
+  max-width: 100%;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.imgleft5                        { width: 5%; }
+.imgleft10                       { width: 10%; }
+.imgleft20                       { width: 20%; }
+.imgleft30,  .imgright30         { width: 30%; }
+.imgleft40,  .imgright40         { width: 40%; }
+.imgleft50,  .imgright50         { width: 50%; }
+
+.imgleftfixed100px               { width: 100px; }
+.imgleftfixed150px               { width: 150px; }
+
+
+/* ==========================================================================
+   9. TRAINING PAGE
+   ========================================================================== */
+/* Section headings: a navy rule underneath. Region headings are indented
+   beneath them, and each resource is a bullet with its description below. */
+.training-page .training-section {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2rem 0 .5rem;
+  padding-bottom: .25rem;
+  border-bottom: 2px solid var(--navy);
+}
+
+.training-page .training-region {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 1.25rem 0 .25rem 1rem;
+}
+
+.training-page .resource-list {
+  margin: .25rem 0 1rem;
+  padding-left: 2.5rem;
+}
+.training-page .resource-list li {
+  margin: 0 0 .875rem;
+}
+.training-page .resource-title {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.training-page .resource-list p {
+  margin: .25rem 0 0;
+}
+.training-page .resource-list a {
+  overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================================
+   10. SMALL SCREENS
+   Keep this section LAST so it can override the rules above.
+   On narrow screens there is no room for a side menu, so the layout falls
+   back to the standard one: banner, then a horizontal menu, then content.
+   ========================================================================== */
+
+/* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
+@media (min-width: 50.01em) and (max-height: 800px) {
+  .brand       { padding: 8px 16px 12px; }
+  .brand-wide  { width: 420px; }
+}
+
+/* ---- Tablets and narrow windows: 50em (about 800px) wide or less ---- */
+@media (max-width: 50em) {
+
+  body {
+    display: block;              /* Drop the grid; stack everything */
+    height: auto;
+    overflow: visible;           /* Whole page scrolls normally on small screens */
+  }
+
+  .site-nav,
+  .site-panel {
+    overflow-y: visible;
+  }
+
+  .site-header {
+    display: block;
+  }
+
+  .brand-wide  { display: none; }
+  .brand-small { display: block; width: 90px; }
+
+  .nav-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: .75rem 1rem;
+  }
+  .site-nav a {
+    display: inline-block;
+    padding: .5rem .75rem;
+    white-space: nowrap;
+  }
+
+  .site-panel {
+    padding: 0.01em 16px;
+  }
+
+  img[class*="imgleft"],
+  img[class*="imgright"] {
+    width: min(36%, 220px);
+  }
+}
+
+/* ---- Phones: 32.5em (about 520px) wide or less ---- */
+@media (max-width: 32.5em) {
+
+  .brand       { padding: 10px; }
+  .brand-small { width: 72px; }
+
+  .nav-links {
+    gap: .375rem;
+    padding: .625rem .875rem;
+  }
+  .site-nav a {
+    padding: .5rem .625rem;      /* Buttons wrap onto extra rows; no word is ever split */
+  }
+
+  .site-panel {
+    padding: 0.01em 14px;
+  }
+
+  img[class*="imgleft"],
+  img[class*="imgright"] {
+    float: none;
+    display: block;
+    width: auto;
+    max-width: min(100%, 300px);
+    margin: 12px auto;
+  }
+  /* The decorative IRN patch is hidden on phones so the text starts sooner.
+     Delete this rule to show it again. */
+  .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
+    display: none;
+  }
+
+  .site-footer {
+    padding: .5rem .875rem 1rem;
+  }
+}
