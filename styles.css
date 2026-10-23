@@ -536,6 +536,17 @@ img[class*="imgright"] {
   }
 }
 
+/* ---- Tablets held upright (portrait) ----
+   With a picture floated on each side, the text is squeezed into a narrow
+   column. The decorative IRN patch is hidden here (as on phones) so the text
+   gets the full width beside the left-hand picture. Delete this rule to show
+   the patch again. Landscape tablets are wide enough and keep it. */
+@media (max-width: 64em) and (orientation: portrait) {
+  .site-panel img.imgright30[src="media/irnpatch-small.jpg"] {
+    display: none;
+  }
+}
+
 /* ---- Phones: 32.5em (about 520px) wide or less ---- */
 @media (max-width: 32.5em) {
 
