@@ -437,14 +437,12 @@ img[class*="imgright"] {
 /* ==========================================================================
    9. TRAINING PAGE
    ========================================================================== */
-/* Section headings: a navy rule underneath. Region headings are indented
-   beneath them, and each resource is a bullet with its description below. */
+/* Section headings, with region headings indented beneath them; each
+   resource is a bullet with its description below. */
 .training-page .training-section {
   font-size: 1.25rem;
   font-weight: 700;
   margin: 2rem 0 .5rem;
-  padding-bottom: .25rem;
-  border-bottom: 2px solid var(--navy);
 }
 
 .training-page .training-region {
