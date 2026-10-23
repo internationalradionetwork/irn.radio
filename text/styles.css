@@ -1,0 +1,248 @@
+/**
+ * ============================================================================
+ * IRN Text-Only Site Stylesheet
+ * Theme: Green Phosphor on Black (Terminal Aesthetic)
+ * ============================================================================
+ */
+
+/* ============================================================================
+   1. Theme Variables & Root Settings
+   ============================================================================ */
+:root {
+  --fg: #33ff33;  /* Foreground / text color (bright green) */
+  --dim: #1fa81f; /* Muted text / rule color (dim green) */
+  --bg: #000;     /* Background color (pure black) */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+
+/* ============================================================================
+   2. Base Body & Typography
+   ============================================================================ */
+body {
+  margin: 0;
+  padding: 2rem 1rem 3rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas, "Courier New", monospace;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-shadow: 0 0 4px rgba(51, 255, 51, 0.45);
+}
+
+h1 {
+  font-size: 1em;
+  font-weight: normal;
+  text-align: center;
+  margin: 0;
+  padding: 0.4rem 0;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 2rem 0 0;
+}
+
+h2 + .rule {
+  margin-bottom: 0.8rem;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 1.5rem 0 0.4rem;
+}
+
+h3::before {
+  content: "> ";
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+
+/* ============================================================================
+   3. Links & Interactive Elements
+   ============================================================================ */
+a {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+a:hover, 
+a:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  text-shadow: none;
+  outline: none;
+}
+
+
+/* ============================================================================
+   4. Layout & Components
+   ============================================================================ */
+.wrap {
+  width: 100%;
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 0 2ch;
+}
+
+.rule {
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  color: var(--dim);
+  line-height: 1.2;
+}
+
+.banner {
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+nav {
+  text-align: center;
+  margin: 0.6rem 0;
+  line-height: 2;
+}
+
+nav a {
+  text-decoration: none;
+  margin: 0 0.5ch;
+  white-space: nowrap;
+}
+
+nav a[aria-current="page"] {
+  background: var(--fg);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+
+/* ============================================================================
+   5. Lists (Unordered, Ordered, and Menus)
+   ============================================================================ */
+ul, 
+ol {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  padding-left: 3ch;
+  text-indent: -3ch;
+  margin-bottom: 0.5rem;
+}
+
+ul li::before {
+  content: "*  ";
+  white-space: pre;
+}
+
+ul ul {
+  margin: 0.5rem 0 0 3ch;
+}
+
+ol {
+  counter-reset: n;
+}
+
+ol > li {
+  padding-left: 4ch;
+  text-indent: -4ch;
+  margin-bottom: 0.5rem;
+  counter-increment: n;
+}
+
+ol > li::before {
+  content: counter(n) ".  ";
+  white-space: pre;
+  display: inline;
+  width: 4ch;
+  text-indent: 0;
+}
+
+.menu li {
+  margin-bottom: 0.3rem;
+}
+
+
+/* ============================================================================
+   6. Custom Content Blocks & Utilities
+   ============================================================================ */
+.res {
+  margin: 0 0 1.2rem;
+}
+
+.res > a {
+  font-weight: bold;
+}
+
+.res p {
+  margin: 0.2rem 0 0 3ch;
+}
+
+.note {
+  color: var(--dim);
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+footer .links a {
+  margin: 0 1ch;
+  white-space: nowrap;
+}
+
+
+/* ============================================================================
+   7. Responsive & Print Media Queries
+   ============================================================================ */
+
+/* Large screens / high resolutions */
+@media (min-width: 1600px) {
+  body {
+    font-size: 1.25rem;
+  }
+}
+
+/* Mobile / small screens */
+@media (max-width: 40rem) {
+  body {
+    font-size: 0.95rem;
+    padding: 1rem 0.25rem 2rem;
+  }
+  .wrap {
+    padding: 0 1ch;
+  }
+}
+
+/* Print styles */
+@media print {
+  html, 
+  body {
+    background: #fff;
+  }
+  body, 
+  a {
+    color: #000;
+    text-shadow: none;
+  }
+}
+
