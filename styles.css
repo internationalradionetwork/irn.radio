@@ -58,6 +58,8 @@
 
 html {
   overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;   /* Stops iPads resizing text when rotated */
+  text-size-adjust: 100%;
 }
 
 body {
@@ -478,13 +480,21 @@ img[class*="imgright"] {
    ========================================================================== */
 
 /* ---- Wide but short windows (small laptops): a slimmer banner leaves more room for content ---- */
-@media (min-width: 50.01em) and (max-height: 800px) {
+@media (min-width: 64.01em) and (max-height: 800px) {
   .brand       { padding: 8px 16px 12px; }
   .brand-wide  { width: 420px; }
 }
 
-/* ---- Tablets and narrow windows: 50em (about 800px) wide or less ---- */
-@media (max-width: 50em) {
+/* ---- Tablets and narrow windows ----
+   The stacked layout (banner, horizontal menu, content) is used when:
+   - the window is 64em (about 1024px) wide or less. This covers tablets in
+     portrait, including iPads at 810-834px wide, which are wider than the
+     old 800px limit and so wrongly got the side menu; OR
+   - the screen is a touch screen that is short (800px or less), which is a
+     tablet held in landscape. There the fixed-height side menu was cut off
+     and hard to scroll, so the whole page scrolls instead. ---- */
+@media (max-width: 64em),
+       (pointer: coarse) and (max-height: 50em) {
 
   body {
     display: block;              /* Drop the grid; stack everything */
@@ -502,7 +512,7 @@ img[class*="imgright"] {
   }
 
   .brand-wide  { display: none; }
-  .brand-small { display: block; width: 90px; }
+  .brand-small { display: block; width: 120px; }   /* Phones shrink this below */
 
   .nav-links {
     flex-direction: row;
@@ -512,7 +522,7 @@ img[class*="imgright"] {
   }
   .site-nav a {
     display: inline-block;
-    padding: .5rem .75rem;
+    padding: .625rem 1rem;       /* Comfortable touch size on tablets */
     white-space: nowrap;
   }
 
@@ -561,4 +571,13 @@ img[class*="imgright"] {
   .site-footer {
     padding: .5rem .875rem 1rem;
   }
+}
+
+
+/* ---- Short screens (phones held sideways): a slimmer banner leaves room for content ----
+   Kept at the very end so it overrides the tablet and phone rules above. */
+@media (max-height: 30em) {
+  .brand       { padding: 6px 10px 10px; }
+  .brand-small { width: 56px; }
+  .nav-links   { padding: .5rem .875rem; }
 }
