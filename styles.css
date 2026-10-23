@@ -437,32 +437,37 @@ img[class*="imgright"] {
 /* ==========================================================================
    9. TRAINING PAGE
    ========================================================================== */
+/* Section headings: a navy rule underneath. Region headings are indented
+   beneath them, and each resource is a bullet with its description below. */
 .training-page .training-section {
   font-size: 1.25rem;
   font-weight: 700;
-  margin: 16px 0 8px;
+  margin: 2rem 0 .5rem;
+  padding-bottom: .25rem;
+  border-bottom: 2px solid var(--navy);
 }
 
 .training-page .training-region {
   font-size: 1.125rem;
   font-weight: 700;
-  margin: 12px 0 6px;
+  margin: 1.25rem 0 .25rem 1rem;
 }
 
-.training-page .resource {
-  margin: 0 0 14px;
+.training-page .resource-list {
+  margin: .25rem 0 1rem;
+  padding-left: 2.5rem;
 }
-.training-page .resource h4,
-.training-page .resource h5 {
-  font-size: 1em;
+.training-page .resource-list li {
+  margin: 0 0 .875rem;
+}
+.training-page .resource-title {
   font-weight: 700;
-  line-height: 1.5;
-  margin: 0 0 3px;
+  overflow-wrap: anywhere;
 }
-.training-page .resource p {
-  margin: 3px 0;
+.training-page .resource-list p {
+  margin: .25rem 0 0;
 }
-.training-page .resource a {
+.training-page .resource-list a {
   overflow-wrap: anywhere;
 }
 
