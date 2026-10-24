@@ -1,0 +1,328 @@
+/* ==========================================================================
+   IRN text-only site stylesheet
+   ==========================================================================
+
+   Look: green phosphor text on a black screen, like an old terminal.
+   Layout: one monospace column, centred on the screen, about 80 characters
+   wide. Page titles sit between "====" rules, section headings are
+   underlined with "----" rules. There are no images anywhere.
+
+   SECTIONS
+   --------------------------------------------------------------------------
+    1. Settings          Colours (change the whole look here)
+    2. Base              Page background, font, links
+    3. Page column       The centred 80-character column
+    4. Header            Banner, tagline and the menu
+    5. Headings & rules  Titles, section headings, "====" and "----" lines
+    6. Text              Paragraphs and lists
+    7. Special blocks    Training-page entries and small notes
+    8. Footer            Links at the bottom of each page
+    9. Large screens     Bigger text on big monitors
+   10. Small screens     Phone and narrow-window adjustments
+   11. Printing          Black on white, no glow
+
+   QUICK RECIPES
+   --------------------------------------------------------------------------
+   Amber instead of green   -> in section 1 set --fg: #ffb000 and
+                               --dim: #b37a00, and change the 51,255,51
+                               in the text-shadow (section 2) to 255,176,0.
+   Dimmer or brighter text  -> edit --fg in section 1.
+   Remove the glow          -> delete the text-shadow line in section 2.
+   Wider or narrower column -> change max-width in section 3. Keep the
+                               rules in the HTML (80 characters) at least
+                               as wide as the column; extra length is
+                               clipped automatically.
+   Change the text size     -> edit font-size in "body" (section 2).
+
+   HOW THE RULES WORK
+   --------------------------------------------------------------------------
+   Every "====" and "----" line is real text in the HTML, inside
+   <div class="rule" aria-hidden="true">. It is 80 characters long, but the
+   column's content area is only 76 characters wide (80 minus 2 characters
+   of padding each side), so the line is clipped cleanly at the column
+   edge on any screen size, and screen readers skip it.
+
+   SIZES: the column width uses "ch" units (the width of one character), so
+   it always holds the same number of characters whatever the font size.
+   Text sizes use rem, which follows the visitor's browser text-size setting.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. SETTINGS
+   ========================================================================== */
+:root {
+  --fg:  #33ff33;    /* Main text and links: bright phosphor green */
+  --dim: #1fa81f;    /* Rules, tagline and notes: softer green */
+  --bg:  #000;       /* Screen background: black */
+}
+
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);              /* Black even if the page is short */
+  -webkit-text-size-adjust: 100%;     /* Stops phones resizing text when rotated */
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem 3rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "DejaVu Sans Mono", "Liberation Mono", Menlo, Consolas,
+               "Courier New", monospace;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-shadow: 0 0 4px rgba(51, 255, 51, .45);   /* The phosphor glow */
+}
+
+a {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+/* Hovered or keyboard-focused links invert, like a highlighted terminal line */
+a:hover,
+a:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  text-shadow: none;
+  outline: none;
+}
+
+
+/* ==========================================================================
+   3. PAGE COLUMN
+   ========================================================================== */
+.wrap {
+  width: 100%;
+  max-width: 80ch;      /* 80 characters including padding = 76 of content */
+  margin: 0 auto;       /* Centres the column on wide screens */
+  padding: 0 2ch;
+}
+
+
+/* ==========================================================================
+   4. HEADER
+   Masthead (network name and tagline, centred) followed by the menu.
+   The current page's menu entry is shown in reverse video.
+   ========================================================================== */
+.masthead {
+  padding: .6rem 0;
+  text-align: center;
+}
+
+.banner {
+  margin: 0;
+  text-align: center;
+  letter-spacing: .08em;
+}
+
+nav {
+  margin: .6rem 0;
+  text-align: center;
+  line-height: 2;       /* Extra space so wrapped menu rows don't touch */
+}
+
+nav a {
+  margin: 0 .5ch;
+  text-decoration: none;
+  white-space: nowrap;  /* Keeps each "[ ITEM ]" together when the menu wraps */
+}
+
+nav a[aria-current="page"] {
+  background: var(--fg);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+
+/* ==========================================================================
+   5. HEADINGS & RULES
+   h1  Page title, centred between two "====" rules
+   h2  Section heading, underlined with a "----" rule
+   h3  Sub-heading, introduced with "> "
+   Headings are typed in capitals in the HTML; no CSS conversion is used.
+   ========================================================================== */
+.rule {
+  overflow: hidden;       /* Clips the 80-character line to the column */
+  white-space: nowrap;
+  user-select: none;      /* Rules are not copied when text is selected */
+  color: var(--dim);
+  line-height: 1.2;
+}
+
+h1 {
+  margin: 0;
+  padding: .4rem 0;
+  font-size: 1em;
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: .05em;
+}
+
+h2 {
+  margin: 2rem 0 0;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+h2 + .rule {
+  margin-bottom: .8rem;   /* Space between a section's rule and its text */
+}
+
+h3 {
+  margin: 1.5rem 0 .4rem;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+h3::before {
+  content: "> ";
+}
+
+
+/* ==========================================================================
+   6. TEXT
+   Paragraphs and lists. Lists use hanging indents so wrapped lines line up
+   under the first line of text rather than under the bullet or number.
+   ========================================================================== */
+p {
+  margin: 0 0 1rem;
+}
+
+ul,
+ol {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;       /* Markers are drawn below with ::before */
+}
+
+/* Bullet lists: "*" marker, 3-character hanging indent */
+ul li {
+  margin-bottom: .5rem;
+  padding-left: 3ch;
+  text-indent: -3ch;
+}
+
+ul li::before {
+  content: "*  ";
+  white-space: pre;       /* Keeps the two spaces after the asterisk */
+}
+
+/* A list inside a list item (for example in the TeamSpeak instructions) */
+ul ul {
+  margin: .5rem 0 0 3ch;
+}
+
+/* Numbered lists: "1." marker in a 5-character hanging indent, so that
+   items 1 to 99 all line up */
+ol {
+  counter-reset: item;
+}
+
+ol > li {
+  margin-bottom: .5rem;
+  padding-left: 5ch;
+  text-indent: -5ch;
+  counter-increment: item;
+}
+
+ol > li::before {
+  content: counter(item) ".";
+  display: inline-block;
+  width: 5ch;
+  text-indent: 0;
+}
+
+
+/* ==========================================================================
+   7. SPECIAL BLOCKS
+   ========================================================================== */
+
+/* Small print and secondary text (for example the Jotform privacy notice) */
+.note {
+  color: var(--dim);
+}
+
+/* Training page: one entry per resource.
+   The first link is the resource name; the paragraphs are indented below it. */
+.res {
+  margin: 0 0 1.2rem;
+}
+
+.res > a {
+  font-weight: bold;
+}
+
+.res p {
+  margin: .2rem 0 0 3ch;
+}
+
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+footer .links a {
+  margin: 0 1ch;
+  white-space: nowrap;
+}
+
+
+/* ==========================================================================
+   9. LARGE SCREENS
+   ========================================================================== */
+@media (min-width: 1600px) {
+  body {
+    font-size: 1.25rem;   /* The column scales with the text, staying 80 characters wide */
+  }
+}
+
+
+/* ==========================================================================
+   10. SMALL SCREENS
+   The column simply fills the screen; the rules clip to fit.
+   ========================================================================== */
+@media (max-width: 40rem) {
+  body {
+    padding: 1rem .25rem 2rem;
+    font-size: .95rem;
+  }
+
+  .wrap {
+    padding: 0 1ch;
+  }
+
+  .masthead br {
+    display: none;            /* Let the tagline wrap naturally on a narrow screen */
+  }
+}
+
+
+/* ==========================================================================
+   11. PRINTING
+   Black text on white paper, no glow, no wasted ink on a black background.
+   ========================================================================== */
+@media print {
+  html,
+  body {
+    background: #fff;
+  }
+
+  body,
+  a {
+    color: #000;
+    text-shadow: none;
+  }
+}
